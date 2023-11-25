@@ -1,0 +1,48 @@
+version: '3.4'
+
+volumes:
+  datauseridentity:
+
+services:
+  apigateway:
+    build:
+      context: ./ApiGateway
+      dockerfile: Dockerfile
+    ports:
+      - "5051:80"
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Test
+    networks:
+      - apprede
+
+  dbidentityuser:
+    image: mysql:8.0.22
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - datauseridentity:/var/lib/mysql
+      - "~/sql-scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: usersocelot
+    networks:
+      - apprede
+
+  identityapi:
+    build:
+      context: ./IdentityApi
+      dockerfile: Dockerfile
+    depends_on:
+      - dbidentityuser
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Test
+    networks:
+      - apprede
+
+networks:
+  apprede:
+    driver:
+      bridge

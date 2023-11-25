@@ -1,0 +1,16 @@
+{
+    "Routes": [
+        {
+            "UpstreamPathTemplate": "/register",
+            "UpstreamHttpMethod": [ "Post", "Options" ],
+            "DownstreamScheme": "http",
+            "DownstreamPathTemplate": "/api/register"
+        },
+        {
+            "UpstreamPathTemplate": "/login",
+            "UpstreamHttpMethod": [ "Post", "Options" ],
+            "DownstreamScheme": "http",
+            "DownstreamPathTemplate": "/api/login"
+        }
+    ]
+}

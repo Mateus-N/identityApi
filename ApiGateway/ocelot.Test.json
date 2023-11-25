@@ -1,0 +1,23 @@
+{
+    "Routes": [
+        {
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "identityapi",
+                    "Port": 80
+                }
+            ]
+        },
+        {
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "identityapi",
+                    "Port": 80
+                }
+            ]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://localhost:5051"
+    }
+}
